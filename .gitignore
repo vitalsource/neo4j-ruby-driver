@@ -14,7 +14,7 @@
 *.lock
 *.jar
 *.gem
-*.gemspec
+# *.gemspec
 *.crt
 .env
 .idea/
