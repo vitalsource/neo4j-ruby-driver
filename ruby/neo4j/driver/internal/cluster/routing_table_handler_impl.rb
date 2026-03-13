@@ -60,7 +60,7 @@ module Neo4j::Driver
           @log.debug("Fetched cluster composition for database '#{@database_name.description}'. #{composition_lookup_result.cluster_composition}")
           @routing_table.update(composition_lookup_result.cluster_composition)
           @routing_table_registry.remove_aged
-          addresses_to_retain = @routing_table_registry.all_servers.map(&:unicast_stream).reduce(&:+)
+          addresses_to_retain = @routing_table_registry.all_servers.map(&:unicast_stream).reduce(Set.new, :+)
 
           composition_lookup_result.resolved_initial_routers&.then do |addresses|
             addresses_to_retain << addresses
