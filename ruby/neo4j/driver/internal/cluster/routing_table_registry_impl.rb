@@ -52,7 +52,7 @@ module Neo4j::Driver
         def all_servers
           # obviously we just had a snapshot of all servers in all routing tables
           # after we read it, the set could already be changed.
-          @routing_table_handlers.values.map(&:servers).reduce(&:+)
+          @routing_table_handlers.values.map(&:servers).reduce(Set.new, :+)
         end
 
         def remove(database_name)
